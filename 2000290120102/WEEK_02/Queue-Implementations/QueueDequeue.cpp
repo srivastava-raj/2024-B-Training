@@ -1,0 +1,20 @@
+void queueDequeue()
+{
+    // If queue is empty
+    if (front == rear) {
+        printf("\nQueue is empty\n");
+        return;
+    }
+ 
+    // Shift all the elements from index 2
+    // till rear to the left by one
+    else {
+        for (int i = 0; i < rear - 1; i++) {
+            queue[i] = queue[i + 1];
+        }
+ 
+        // decrement rear
+        rear--;
+    }
+    return;
+}
