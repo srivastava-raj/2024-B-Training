@@ -1,0 +1,148 @@
+// LINKED LIST OPERATIONS
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Node structure
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Insertion at the beginning of the linked list
+void insertAtBeginning(Node** head, int newData) {
+    Node* newNode = new Node();
+    newNode->data = newData;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+// Insertion at the end of the linked list
+void insertAtEnd(Node** head, int newData) {
+    Node* newNode = new Node();
+    newNode->data = newData;
+    newNode->next = nullptr;
+
+    if (*head == nullptr) {
+        *head = newNode;
+        return;
+    }
+
+    Node* lastNode = *head;
+    while (lastNode->next != nullptr) {
+        lastNode = lastNode->next;
+    }
+
+    lastNode->next = newNode;
+}
+
+// Insertion after a given node in the linked list
+void insertAfter(Node* prevNode, int newData) {
+    if (prevNode == nullptr) {
+        cout << "Previous node cannot be null." << endl;
+        return;
+    }
+
+    Node* newNode = new Node();
+    newNode->data = newData;
+    newNode->next = prevNode->next;
+    prevNode->next = newNode;
+}
+
+// Deletion of a node with a given key
+void remove(Node** head, int key) {
+    Node* temp = *head;
+    Node* prev = nullptr;
+
+    // If the head node itself holds the key to be deleted
+    if (temp != nullptr && temp->data == key) {
+        *head = temp->next;
+        delete temp;
+        return;
+    }
+
+    // Search for the key to be deleted, keeping track of the previous node
+    while (temp != nullptr && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // If the key is not present in the linked list
+    if (temp == nullptr)
+        return;
+
+    // Unlink the node from the linked list
+    prev->next = temp->next;
+    delete temp;
+}
+
+// Display the linked list
+void display(Node* node) {
+    while (node != nullptr) {
+        cout << node->data << " ";
+        node = node->next;
+    }
+     cout << endl;
+}
+
+int main() {
+    Node* head = nullptr;
+    int choice, data;
+    Node* currentNode = nullptr; // Move the declaration outside the switch statement
+
+    do {
+        cout << "Linked List Operations:" << endl;
+        cout << "1. Insert at the beginning" << endl;
+        cout << "2. Insert at the end" << endl;
+        cout << "3. Insert after a node" << endl;
+        cout << "4. Delete a node" << endl;
+        cout << "5. Display the linked list" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter data to insert at the beginning: ";
+                cin >> data;
+                insertAtBeginning(&head, data);
+                break;
+            case 2:
+                cout << "Enter data to insert at the end: ";
+                cin >> data;
+                insertAtEnd(&head, data);
+                break;
+            case 3:
+                int nodeData;
+                cout << "Enter data of the node after which to insert: ";
+                cin >> nodeData;
+                cout << "Enter data to insert: ";
+                cin >> data;
+                currentNode = head; // Assign the value to currentNode
+                while (currentNode != nullptr && currentNode->data != nodeData) {
+                    currentNode = currentNode->next;
+                }
+                insertAfter(currentNode, data);
+                break;
+            case 4:
+                cout << "Enter data of the node to delete: ";
+                cin >> data;
+                remove(&head, data);
+                break;
+            case 5:
+                cout << "Linked list: ";
+                display(head);
+                break;
+            case 6:
+                cout << "Exiting the program." << endl;
+                break;
+            default:
+               cout << "Invalid choice. Please try again." << endl;
+        }
+
+          cout << endl;
+
+    } while (choice != 6);
+
+    return 0;
+}
