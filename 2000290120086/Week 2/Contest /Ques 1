@@ -1,0 +1,30 @@
+class Solution {
+    public int theMaximumAchievableX(int num, int t) {
+        int i=num+2*t;
+        int max=0;
+        while(i>0)
+        {
+            int j=i;
+            for(int x=1 ; x<=t ; x++)
+            {
+                if(num>i)
+                {
+                    num --;
+                    i++;
+                }
+                else
+                {
+                    num++;
+                    i--;
+                }
+            }
+            if(i==num)
+            {
+                max = j;
+                break;
+            }
+            i=j-1;
+        }
+        return max;
+    }
+}
