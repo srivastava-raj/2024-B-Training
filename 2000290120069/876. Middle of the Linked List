@@ -1,0 +1,21 @@
+Ques:
+Given the head of a singly linked list, return the middle node of the linked list.
+If there are two middle nodes, return the second middle node.
+Soln:
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        if(head->next==NULL)
+           return head;
+        ListNode *s=head,*f=head->next;
+        int i=0;
+        while(f!=NULL&&f->next!=NULL){
+                f=f->next->next;
+                s=s->next;
+        }
+        if(f==NULL)
+           return s;
+        return s->next;
+
+    }
+};
