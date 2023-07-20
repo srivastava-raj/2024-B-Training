@@ -1,0 +1,58 @@
+#include <bits/stdc++.h> 
+
+class Stack {
+    int to;
+    int *arr;
+    int size;
+public:
+    
+    Stack(int capacity) {
+       
+        arr=new int[capacity];
+         to=-1;
+         size=capacity;
+         
+    }
+
+    void push(int num) {
+       
+        if(to>999)
+        return;
+        to++;
+        arr[to]=num;
+    }
+
+    int pop() {
+       
+        if(to==-1)
+        return -1;
+        int x=arr[to];
+        to--;
+        return x;
+    }
+    
+    int top() {
+        
+        if(to==-1)
+        return -1;
+        else
+        return arr[to];
+    }
+    
+    int isEmpty() {
+       
+        if(to==-1)
+        return 1;
+        else
+        return 0;
+    }
+    
+    int isFull() {
+        
+        if(to>999)
+        return 1;
+        else
+        return 0;
+    }
+    
+};
