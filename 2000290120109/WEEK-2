@@ -1,0 +1,331 @@
+//STACK IMPLEMENTATION
+#include <iostream>
+using namespace std;
+struct Node 
+{ 
+   int data; 
+   struct Node *next; 
+}; 
+struct Node* top = NULL; 
+void push(int val) 
+{
+   struct Node* newnode = new(struct Node); 
+   newnode->data = val; 
+   newnode->next = top; 
+   top = newnode; 
+}
+void pop() 
+{
+   if(top==NULL)
+      cout<<"Stack Underflow"<<endl;
+   else 
+   {
+      cout<<"The popped element is "<< top->data <<endl;
+      top = top->next;
+   }
+}
+void display() 
+{
+   struct Node* ptr;
+   if(top==NULL)
+      cout<<"stack is empty";
+   else 
+   {   
+      ptr = top; 
+      cout<<"Stack elements are: ";
+      while (ptr != NULL) 
+      { 
+         cout<< ptr->data <<" "; 
+         ptr = ptr->next; 
+      } 
+   }
+   cout<<endl;
+}
+int main() 
+{
+   int ch, val; 
+   cout<<"1) Push in stack"<<endl;
+   cout<<"2) Pop from stack"<<endl;
+   cout<<"3) Display stack"<<endl;
+   cout<<"4) Exit"<<endl;
+   do 
+   {
+      cout<<"Enter choice: "<<endl;
+      cin>>ch;
+      switch(ch) 
+      {
+         case 1: 
+         {   
+            cout<<"Enter value to be pushed:"<<endl;
+            cin>>val;
+            push(val);
+            break;
+         }
+         case 2: 
+         {
+            pop();
+            break;
+         }
+         case 3: 
+         {
+            display();
+            break;
+         }
+         case 4: 
+         {
+            cout<<"Exit"<<endl;
+            break;
+         }
+         default: 
+         {
+            cout<<"Invalid Choice"<<endl;
+         }
+      }
+   }while(ch!=4); 
+      return 0;
+}  
+
+******************************************************************************************************************************************************************
+
+//QUEUE IMPLEMENTATION
+#include <iostream>
+using namespace std;
+struct node {
+   int data;
+   struct node *next;
+};
+struct node* front = NULL;
+struct node* rear = NULL;
+struct node* temp;
+void Insert() {
+   int val;
+   cout<<"Insert the element in queue : "<<endl;
+   cin>>val;
+   if (rear == NULL) {
+      rear = (struct node *)malloc(sizeof(struct node));
+      rear->next = NULL;
+      rear->data = val;
+      front = rear;
+   } else {
+      temp=(struct node *)malloc(sizeof(struct node));
+      rear->next = temp;
+      temp->data = val;
+      temp->next = NULL;
+      rear = temp;
+   }
+}
+void Delete() {
+   temp = front;
+   if (front == NULL) {
+      cout<<"Underflow"<<endl;
+      return;
+   }
+   else
+   if (temp->next != NULL) {
+      temp = temp->next;
+      cout<<"Element deleted from queue is : "<<front->data<<endl;
+      free(front);
+      front = temp;
+   } else {
+      cout<<"Element deleted from queue is : "<<front->data<<endl;
+      free(front);
+      front = NULL;
+      rear = NULL;
+   }
+}
+void Display() {
+   temp = front;
+   if ((front == NULL) && (rear == NULL)) {
+      cout<<"Queue is empty"<<endl;
+      return;
+   }
+   cout<<"Queue elements are: ";
+   while (temp != NULL) {
+      cout<<temp->data<<" ";
+      temp = temp->next;
+   }
+   cout<<endl;
+}
+int main() {
+   int ch;
+   cout<<"1) Insert element to queue"<<endl;
+   cout<<"2) Delete element from queue"<<endl;
+   cout<<"3) Display all the elements of queue"<<endl;
+   cout<<"4) Exit"<<endl;
+   do {
+      cout<<"Enter your choice : "<<endl;
+      cin>>ch;
+      switch (ch) {
+         case 1: Insert();
+         break;
+         case 2: Delete();
+         break;
+         case 3: Display();
+         break;
+         case 4: cout<<"Exit"<<endl;
+         break;
+         default: cout<<"Invalid choice"<<endl;
+      }
+   } while(ch!=4);
+   return 0;
+}
+*****************************************************************************************************************************************************************
+// STRIVER SHEET
+//IMPLEMENT STACK USING QUEUES
+class MyStack {
+public:
+    queue<int>q;
+    MyStack() {
+       
+        
+    }
+    
+    void push(int x) {
+        q.push(x);
+        for(int i=0;i<q.size()-1;i++){
+            q.push(q.front());
+            q.pop();
+        }
+        
+    }
+    
+    int pop() {
+        int n=q.front();
+        q.pop();
+        return n;
+        
+    }
+    
+    int top() {
+        return q.front();
+        
+    }
+    
+    bool empty() {
+        if(q.empty()){
+            return true;
+        }
+        return false;
+    }
+};
+*********************************************************************
+//VALID PARENTHESIS
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>st;
+        for(auto i: s){
+            if(i=='('||i=='['||i=='{'){
+                st.push(i);
+            }else{
+                if(st.size()==0){
+                    return false;
+                }else{
+                    char ch=st.top();
+                    st.pop();
+                    if((i==')'&& ch=='(')||(i=='}'&&ch=='{')||(i==']'&&ch=='[')){
+                        continue;
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
+        return st.empty();
+    }
+};
+*************************************************************************
+//NEXT GREATOR ELEMENT
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+     vector<int> result;
+    int n = nums2.size();
+
+    for (int num1 : nums1) {
+        int index =find(nums2.begin(), nums2.end(), num1) - nums2.begin();
+        int nextGreater = -1;
+
+        for (int i = index + 1; i < n; i++) {
+            if (nums2[i] > num1) {
+                nextGreater = nums2[i];
+                break;
+            }
+        }
+
+        result.push_back(nextGreater);
+    }
+
+    return result;
+    }
+};
+***************************************************************************
+//MIN STACK
+class MinStack {
+    stack<pair<int,int>>st;
+public:
+    MinStack() {
+       
+        
+    }
+    
+    void push(int val) {
+        int mn;
+        if(st.empty()){
+            mn=val;
+        }else{
+             mn=min(st.top().second,val);
+            
+        }
+        st.push({val,mn});
+    }
+    
+    void pop() {
+        if(!st.empty()){
+        st.pop();
+        } 
+    }
+    
+    int top() {
+        if(st.empty()){
+           return 0;}else{
+        return st.top().first;
+        }   
+    }
+    
+    int getMin() {
+        return st.top().second;
+        
+    }
+};
+*******************************************************************************
+//ONLINE STACK SPAN
+class StockSpanner {
+public:
+   vector<int>v1;
+    vector<int>v2;
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+        v1.push_back(price);
+        int n=v1.size()-1;
+        if(n==0){v2.push_back(1);return 1;}
+        int count=0;
+        int temp=v1[n];
+       
+        for(int i=n;i>=0;i--){
+            if(i>0 and temp<v1[i-1]){break;}
+            else if(i>0){
+                count+=v2[i-1];
+                i=i-v2[i-1]+1;
+             
+            }   
+            
+        }
+        count+=1;
+        v2.push_back(count);
+        return count;
+    }
+};
