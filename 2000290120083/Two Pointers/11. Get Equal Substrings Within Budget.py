@@ -1,9 +1,4 @@
 # https://leetcode.com/problems/get-equal-substrings-within-budget/
-'''
-Calculate the differences between a[i] and b[i].
-Use a sliding window to track the longest valid substring.
-'''
-
 class Solution:
     def equalSubstring(self, s, t, maxCost):
         costs = []
