@@ -1,9 +1,5 @@
 # https://leetcode.com/problems/search-in-rotated-sorted-array/
-''' 
-Even the array is rotated sorted if we can use binary search in it, as one sided of the mid will be 
-sorted and other sider unsorted. if target not present in sorted side then it must be in the unsorted 
-part. change l and r pointer likewise.
-'''
+
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l = 0; r = len(nums)-1
@@ -13,15 +9,15 @@ class Solution:
             
             if nums[mid] == target: return mid
             
-            elif nums[l] <= nums[mid]:  # Left subarray of mid is sorted
-                if nums[l] <= target < nums[mid]: # target present at Left subarray of mid 
+            elif nums[l] <= nums[mid]: 
+                if nums[l] <= target < nums[mid]:
                     r = mid-1
-                else: # target at right subarray of mid
+                else: 
                     l = mid+1
-            else:  # right subarray of mid is sorted
-                if nums[mid] < target <= nums[r]:  # target is present at right subarray of mid
+            else: 
+                if nums[mid] < target <= nums[r]:  
                     l = mid+1
-                else:  # target at left subarray of mid
+                else:  
                     r = mid - 1
         
         return -1
