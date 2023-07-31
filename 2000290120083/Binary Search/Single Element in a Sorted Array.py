@@ -1,12 +1,4 @@
 # https://leetcode.com/problems/single-element-in-a-sorted-array/
-'''
-If every element in the sorted array were to appear exactly twice, they would occur in pairs at indices i, i+1 for all even i.
-
-Equivalently, nums[i] = nums[i+1] and nums[i+1] != nums[i+2] for all even i.
-
-When we insert the unique element into this list, the indices of all the pairs following it will be shifted by one, negating the above relationship.
-'''
-
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
         if len(nums) == 1: return nums[0]
