@@ -1,10 +1,5 @@
 # https://leetcode.com/problems/palindrome-linked-list/
 
-'''
-Go to the middle node and reverse the right-side linkedlist.
-Then take 2 pointers one from start and another from middle and check
-equality of value.
-'''
 
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
