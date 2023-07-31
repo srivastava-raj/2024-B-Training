@@ -1,5 +1,4 @@
-# https://www.youtube.com/watch?v=HrybPYpOvz0&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=22
-# https://practice.geeksforgeeks.org/problems/longest-common-substring1452/1#
+
 
 class Solution:
     def longestCommonSubstr(self, S1, S2, n, m):
