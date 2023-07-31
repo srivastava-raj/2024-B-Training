@@ -1,10 +1,4 @@
 # https://leetcode.com/problems/sort-colors/
-# https://youtu.be/oaVa-9wmpns
-'''
-Dutch National Flag Algorithm:
-
-Use 3 pointers named low, mid, and high to move 0s to the left and 2s to the right and 1s in the middle of the array and hence the array will be sorted. 
-'''
 
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
