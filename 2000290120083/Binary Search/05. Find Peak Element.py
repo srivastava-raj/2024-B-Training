@@ -1,5 +1,4 @@
 # https://leetcode.com/problems/find-peak-element/
-# https://youtu.be/OINnBJTRrMU
 
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
@@ -11,7 +10,6 @@ class Solution:
         while low <= high:
             
             mid = low + (high - low) // 2
-            # Instead of writting mid = (low + high)//2 we should write mid = low + (high - low)//2 because of INTEGER OVERFLOW in the former case
             
             if 0 < mid < n-1:
                 if nums[mid-1] < nums[mid] > nums[mid+1]:
