@@ -1,0 +1,249 @@
+//Binary Search
+class Solution {
+    public int search(int[] nums, int target) {
+        int l = 0;
+        int h = nums.length-1;
+
+        while(l<=h){
+            int m = l+(h-l)/2;
+
+            if(nums[m] == target)
+            return m;
+            else if(nums[m]<target)
+            l = m+1;
+            else
+            h = m-1;
+
+        }
+        return -1;
+        }
+    
+}
+//Single Element in a sorted array
+class Solution {
+    public int search(int[] nums, int target) {
+        int l = 0;
+        int h = nums.length-1;
+
+        while(l<=h){
+            int m = l+(h-l)/2;
+
+            if(nums[m] == target)
+            return m;
+            else if(nums[m]<target)
+            l = m+1;
+            else
+            h = m-1;
+
+        }
+        return -1;
+        }
+    
+}
+
+// Search in a rotated array
+class Solution {
+     public int search(int[] nums,int target){
+         for(int i = 0; i < nums.length;i++){
+
+            //check if taget is present in the rotated array
+
+            if(nums[i] == target){
+
+                return i;//if target is found in the array return it's index
+            }
+        }
+        return -1;
+     }
+}
+
+//Median of two sorted array
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    int res[] = new int[nums1.length + nums2.length];
+
+    int i=0,j=0,k=0;
+
+    while(i<nums1.length && j< nums2.length){
+        if(nums1[i] < nums2[j]){
+            res[k] = nums1[i];
+            k++;i++;
+        }
+        else if(nums1[i]>nums2[j]){
+            res[k] = nums2[j];
+            k++;j++;
+        }
+        else{
+            res[k] = nums1[i];
+            k++;i++;
+            res[k] = nums2[j];
+            k++;j++;
+        }
+    }
+     while(i<nums1.length){
+         res[k] = nums1[i];
+         k++;i++;
+     }
+     while(j<nums2.length){
+         res[k] = nums2[j];
+         k++;j++;
+     }
+     int mid = res.length/2;
+     if(res.length%2==0){
+         return (double)(res[mid-1]+res[mid])/2;
+     }
+     else{
+         return (double)res[mid];
+     }
+        
+    }
+}
+
+//K-th element of two sorted array
+class Solution {
+    public long kthElement( int arr1[], int arr2[], int n, int m, int k) {
+    
+
+    long[] ans = new long[arr1.length+arr2.length];
+    // ArrayList<long> ans = new ArrayList<>();
+    for(int i = 0 ; i<n; i++){
+        ans[i] = arr1[i];
+    }
+    for(int i=0; i<m; i++){
+        ans[n+i] = arr2[i];
+    }
+    Arrays.sort(ans);
+    for(int i=0; i<ans.length; i++){
+        if(i==k-1){
+            return ans[i];
+        }
+    }return -1;
+        
+    }
+}
+
+//Kth largest element in an array
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++){
+            if(i<k){
+                pq.add(nums[i]);
+            }
+            else{
+                if(nums[i]>pq.peek()){
+                    pq.remove();
+                    pq.add(nums[i]);
+                }
+            }
+        }
+        return pq.peek();
+    }
+}
+
+//Merge K sorted array
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoSLL(ListNode l1,ListNode l2){
+        if(l1 == null)
+        return l2;
+        if(l2 == null)
+        return l1;
+        ListNode temp = new ListNode();
+        ListNode curr = temp;
+        while(l1 != null && l2!= null){
+       if(l1.val < l2.val){
+           temp.next = l1;
+           l1 = l1.next;
+       } else{
+           temp.next = l2;
+           l2 = l2.next;
+       }
+       temp = temp.next;
+    }
+    temp.next = l1 != null ? l1:l2;
+    return curr.next;
+    }
+    public ListNode mergeKLists(ListNode[] lists,int si,int ei){
+        if(si>ei)
+        return null;
+        if(si == ei)
+        return lists[si];
+        int mid = (si+ei)/2;
+
+        ListNode l1 = mergeKLists(lists,si,mid);
+        ListNode l2 = mergeKLists(lists,mid+1,ei);
+
+        return mergeTwoSLL(l1,l2);
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0) return null;
+        return mergeKLists(lists,0,lists.length-1);
+    }
+}
+
+//Top K Frequent Elements
+class Solution {
+
+        public class Pair implements Comparable<Pair>{
+            int key;
+            int fq;
+
+            Pair(int key,int fq){
+                this.key = key;
+                this.fq = fq;
+            }
+            public int compareTo(Pair o){
+                return this.fq - o.fq;
+            }
+        }
+     public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+
+        for(int i=0;i<nums.length;i++){
+            if(hm.containsKey(nums[i])){
+                int of = hm.get(nums[i]);
+                int nf = of + 1;
+                hm.put(nums[i],nf);
+            }
+            else{
+                hm.put(nums[i], 1);
+            }       
+       }
+      PriorityQueue<Pair> pq = new PriorityQueue<>();
+      
+        for(int key:hm.keySet())
+        {
+            Pair p=new Pair(key,hm.get(key));
+            if(pq.size()<k)
+            {
+                pq.add(p);
+            }
+            // else
+            // {
+            //     Pair curr=pq.peek();
+            //     if(p.fq>curr.fq)
+            //     {
+            //         pq.remove(curr);
+            //         pq.add(p);
+                
+            //     }
+           // }
+        }
+       int[] res=new int[k];
+       for(int i=0;i<k;i++)
+       {
+           res[i]=pq.remove().key;
+       }
+        return res;
+     }
+}
