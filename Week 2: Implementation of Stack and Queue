@@ -1,0 +1,85 @@
+Stack Implementation:
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+    def clear(self):
+        self.items = []
+
+    def print_stack(self):
+        print("Stack:", self.items)
+
+
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+stack.push(4)
+
+stack.print_stack()  
+# Output: Stack: [1, 2, 3, 4]
+
+stack.pop()
+stack.print_stack()  
+# Output: Stack: [1, 2, 3]
+
+
+Queue Implementation:
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def enqueue(self, item):
+        self.items.append(item)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+
+    def front(self):
+        if not self.is_empty():
+            return self.items[0]
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+    def clear(self):
+        self.items = []
+
+    def print_queue(self):
+        print("Queue:", self.items)
+
+
+queue = Queue()
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+queue.enqueue(4)
+
+queue.print_queue()  
+# Output: Queue: [1, 2, 3, 4]
+
+queue.dequeue()
+queue.print_queue()  
+# Output: Queue: [2, 3, 4]
+
