@@ -17,4 +17,8 @@ public class BinarySearch {
 
         return -1; // Element not found in the array
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 28913becf94877b964d8d2bcac7989d7f7f7cdb8
